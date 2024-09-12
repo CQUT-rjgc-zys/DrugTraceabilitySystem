@@ -36,4 +36,12 @@ public class RequestResult<T> {
     public static <T> RequestResult<T> fail() {
         return new RequestResult<>(ResponseCodeEnum.FAIL);
     }
+
+    /**
+     * 请求失败的返回信息（带参数）
+     */
+    public static <T> RequestResult<T> fail(String message) {
+        return new RequestResult<>(ResponseCodeEnum.FAIL.getCode(), null, message);
+    }
+
 }

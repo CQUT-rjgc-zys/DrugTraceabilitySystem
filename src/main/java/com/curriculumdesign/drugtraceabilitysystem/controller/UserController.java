@@ -7,10 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -21,8 +18,18 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public RequestResult<Void> register(@RequestBody @Validated UserDTO user) {
+    public RequestResult<Void> register(@Validated @RequestBody UserDTO user) {
         userService.register(user);
         return RequestResult.success();
+    }
+
+    @GetMapping("/login1")
+    public RequestResult<Void> login1() {
+        return RequestResult.success();
+    }
+
+    @GetMapping("/login2")
+    public String login2() {
+        return "login";
     }
 }

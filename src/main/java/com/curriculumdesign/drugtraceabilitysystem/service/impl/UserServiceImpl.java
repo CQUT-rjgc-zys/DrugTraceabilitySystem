@@ -8,6 +8,7 @@ import com.curriculumdesign.drugtraceabilitysystem.service.UserService;
 import com.curriculumdesign.drugtraceabilitysystem.util.ModelTransformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
@@ -16,6 +17,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     private UserMapper baseMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void register(UserDTO user) {
         UserEntity userEntity = ModelTransformation.transform(user, UserEntity.class);
         baseMapper.insert(userEntity);
