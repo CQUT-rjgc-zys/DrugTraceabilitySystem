@@ -14,6 +14,7 @@ public class UserDTO {
     @NotNull(message = "角色id不能为空")
     private Long roleId;
 
+    @Size(max = 20, message = "用户名长度最大为20")
     private String username;
 
     private String password;

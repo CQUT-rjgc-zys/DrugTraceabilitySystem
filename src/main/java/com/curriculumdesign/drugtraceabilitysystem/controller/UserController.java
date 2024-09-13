@@ -22,14 +22,4 @@ public class UserController {
         userService.register(user);
         return RequestResult.success();
     }
-
-    @GetMapping("/login1")
-    public RequestResult<Void> login1() {
-        return RequestResult.success();
-    }
-
-    @GetMapping("/login2")
-    public String login2() {
-        return "login";
-    }
 }

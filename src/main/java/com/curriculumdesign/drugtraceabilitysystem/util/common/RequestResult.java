@@ -1,8 +1,11 @@
 package com.curriculumdesign.drugtraceabilitysystem.util.common;
 
+import lombok.Data;
+
 /**
  * 请求返回信息封装类
  */
+@Data
 public class RequestResult<T> {
 
     private final Integer code;
