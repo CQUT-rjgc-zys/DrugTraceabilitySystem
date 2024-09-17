@@ -1,5 +1,6 @@
-package com.curriculumdesign.drugtraceabilitysystem.util.common;
+package com.curriculumdesign.drugtraceabilitysystem.util;
 
+import com.curriculumdesign.drugtraceabilitysystem.enums.ResponseCode;
 import lombok.Data;
 
 /**
@@ -20,7 +21,7 @@ public class RequestResult<T> {
         this.message = message;
     }
 
-    RequestResult(ResponseCodeEnum code) {
+    RequestResult(ResponseCode code) {
         this.code = code.getCode();
         this.data = null;
         this.message = code.getInfo();
@@ -30,21 +31,28 @@ public class RequestResult<T> {
      * 请求成功的返回信息（不带参数）
      */
     public static <T> RequestResult<T> success() {
-        return new RequestResult<>(ResponseCodeEnum.SUCCESS);
+        return new RequestResult<>(ResponseCode.SUCCESS);
+    }
+
+    /**
+     * 请求成功的返回信息（带参数）
+     */
+    public static <T> RequestResult<T> success(T data) {
+        return new RequestResult<>(ResponseCode.SUCCESS.getCode(), data, ResponseCode.SUCCESS.getInfo());
     }
 
     /**
      * 请求失败的返回信息（不带参数）
      */
     public static <T> RequestResult<T> fail() {
-        return new RequestResult<>(ResponseCodeEnum.FAIL);
+        return new RequestResult<>(ResponseCode.FAIL);
     }
 
     /**
      * 请求失败的返回信息（带参数）
      */
     public static <T> RequestResult<T> fail(String message) {
-        return new RequestResult<>(ResponseCodeEnum.FAIL.getCode(), null, message);
+        return new RequestResult<>(ResponseCode.FAIL.getCode(), null, message);
     }
 
 }

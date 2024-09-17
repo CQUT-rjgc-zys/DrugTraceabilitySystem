@@ -1,6 +1,6 @@
 package com.curriculumdesign.drugtraceabilitysystem.handler;
 
-import com.curriculumdesign.drugtraceabilitysystem.util.common.RequestResult;
+import com.curriculumdesign.drugtraceabilitysystem.util.RequestResult;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,5 +46,12 @@ public class GlobalExceptionHandler {
         log.error("参数验证失败，错误信息：{}", errorList);
         String errorMessage = String.join(",", errorList);
         return RequestResult.fail(errorMessage);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public RequestResult<String> handleException(IllegalArgumentException e) {
+        log.error("程序运行参数异常，异常信息：{}", e.getMessage());
+        return RequestResult.fail(e.getMessage());
     }
 }

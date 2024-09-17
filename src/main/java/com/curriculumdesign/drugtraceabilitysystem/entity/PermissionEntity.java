@@ -4,39 +4,34 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.curriculumdesign.drugtraceabilitysystem.enums.ApiType;
 import lombok.Data;
 
 @Data
-@TableName("user")
-public class UserEntity {
+@TableName("permission")
+public class PermissionEntity {
 
     /**
-     * 主键
+     * 权限ID
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 角色id <外键
+     * api接口路径
      */
-    @TableField(value = "role_id")
-    private Long roleId;
+    @TableField(value = "api_url")
+    private String apiUrl;
 
     /**
-     * 用户名
+     * api接口描述
      */
-    @TableField(value = "username")
-    private String username;
+    @TableField(value = "api_desc")
+    private String apiDesc;
 
     /**
-     * 密码 <加密存储
+     * api接口类型
      */
-    @TableField(value = "password")
-    private String password;
-
-    /**
-     * 电话号码
-     */
-    @TableField(value = "phone")
-    private String phone;
+    @TableField(value = "api_type")
+    private Integer apiType;
 }

@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("user")
-public class UserEntity {
+@TableName("role")
+public class RoleEntity {
 
     /**
      * 主键
@@ -17,26 +17,20 @@ public class UserEntity {
     private Long id;
 
     /**
-     * 角色id <外键
+     * 角色编码
      */
-    @TableField(value = "role_id")
-    private Long roleId;
+    @TableField(value = "role_code")
+    private String roleCode;
 
     /**
-     * 用户名
+     * 角色名称
      */
-    @TableField(value = "username")
-    private String username;
+    @TableField(value = "role_name")
+    private String roleName;
 
     /**
-     * 密码 <加密存储
+     * 角色描述
      */
-    @TableField(value = "password")
-    private String password;
-
-    /**
-     * 电话号码
-     */
-    @TableField(value = "phone")
-    private String phone;
+    @TableField(value = "role_desc")
+    private String roleDesc;
 }

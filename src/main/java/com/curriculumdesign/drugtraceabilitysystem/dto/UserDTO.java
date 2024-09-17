@@ -17,6 +17,8 @@ public class UserDTO {
     @Size(max = 20, message = "用户名长度最大为20")
     private String username;
 
+    @NotBlank(message = "密码不能为空")
+    @Size(max = 20, message = "密码长度最大为20")
     private String password;
 
     @NotBlank(message = "电话不能为空")

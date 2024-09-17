@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
-@TableName("user")
-public class UserEntity {
+@Accessors(chain = true)
+@TableName("role_permission_mapping")
+public class RolePermissionMappingEntity {
 
     /**
      * 主键
@@ -17,26 +19,20 @@ public class UserEntity {
     private Long id;
 
     /**
-     * 角色id <外键
+     * 角色id
      */
-    @TableField(value = "role_id")
+    @TableField("role_id")
     private Long roleId;
 
     /**
-     * 用户名
+     * 权限id
      */
-    @TableField(value = "username")
-    private String username;
+    @TableField("permission_id")
+    private Long permissionId;
 
     /**
-     * 密码 <加密存储
+     * 是否允许
      */
-    @TableField(value = "password")
-    private String password;
-
-    /**
-     * 电话号码
-     */
-    @TableField(value = "phone")
-    private String phone;
+    @TableField("allowed")
+    private Boolean allowed;
 }

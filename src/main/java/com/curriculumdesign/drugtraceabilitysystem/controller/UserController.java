@@ -2,7 +2,7 @@ package com.curriculumdesign.drugtraceabilitysystem.controller;
 
 import com.curriculumdesign.drugtraceabilitysystem.dto.UserDTO;
 import com.curriculumdesign.drugtraceabilitysystem.service.UserService;
-import com.curriculumdesign.drugtraceabilitysystem.util.common.RequestResult;
+import com.curriculumdesign.drugtraceabilitysystem.util.RequestResult;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;

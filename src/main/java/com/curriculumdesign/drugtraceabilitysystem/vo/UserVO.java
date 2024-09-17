@@ -1,42 +1,35 @@
-package com.curriculumdesign.drugtraceabilitysystem.entity;
+package com.curriculumdesign.drugtraceabilitysystem.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("user")
-public class UserEntity {
+public class UserVO {
 
     /**
      * 主键
      */
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 角色id <外键
+     * 角色信息
      */
-    @TableField(value = "role_id")
-    private Long roleId;
+    private RoleVO roleVO;
 
     /**
      * 用户名
      */
-    @TableField(value = "username")
     private String username;
 
     /**
-     * 密码 <加密存储
+     * 密码
      */
-    @TableField(value = "password")
     private String password;
 
     /**
      * 电话号码
      */
-    @TableField(value = "phone")
     private String phone;
 }

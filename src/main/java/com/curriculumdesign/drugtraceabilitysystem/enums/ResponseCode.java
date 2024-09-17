@@ -1,15 +1,17 @@
-package com.curriculumdesign.drugtraceabilitysystem.util.common;
+package com.curriculumdesign.drugtraceabilitysystem.enums;
 
 /**
  * 响应code值枚举类
  */
-public enum ResponseCodeEnum {
+public enum ResponseCode {
 
     SUCCESS(200, "请求成功"),
 
-    FAIL(500, "请求失败");
+    FAIL(500, "请求失败"),
 
-    ResponseCodeEnum(Integer code, String info) {
+    BUSINESS_ERROR(405, "业务异常");
+
+    ResponseCode(Integer code, String info) {
         this.code = code;
         this.info = info;
     }
