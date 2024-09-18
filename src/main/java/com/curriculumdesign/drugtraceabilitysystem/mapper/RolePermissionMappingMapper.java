@@ -17,4 +17,10 @@ public interface RolePermissionMappingMapper extends BaseMapper<RolePermissionMa
 
     @Select("select * from role_permission_mapping where role_id = #{roleId} order by allowed desc")
     List<RolePermissionMappingEntity> getRolePermissionMappingByRoleId(@Param("roleId") Long roleId);
+
+    @Select("select * from role_permission_mapping where permission_id = #{permissionId}")
+    List<RolePermissionMappingEntity> getRolePermissionMappingByPermissionId(@Param("permissionId") Long id);
+
+    @Delete("delete from role_permission_mapping where permission_id = #{permissionId}")
+    void deleteRolePermissionMappingByPermissionId(@Param("permissionId") Long id);
 }

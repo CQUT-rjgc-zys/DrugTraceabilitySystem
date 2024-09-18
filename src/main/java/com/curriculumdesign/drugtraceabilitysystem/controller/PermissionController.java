@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/permission")
 public class PermissionController {
@@ -28,5 +30,37 @@ public class PermissionController {
     public RequestResult<PermissionVO> addPermission(@RequestBody @Validated PermissionDTO dto) {
         PermissionVO result = service.addPermission(dto);
         return RequestResult.success(result);
+    }
+
+    /**
+     * 根据权限ID删除权限
+     *
+     * @param id 权限id
+     */
+    @PostMapping("/deletePermission")
+    public RequestResult<Void> deletePermissionById(Long id) {
+        service.deletePermissionById(id);
+        return RequestResult.success();
+    }
+
+    /**
+     * 根据权限ID更新权限信息
+     *
+     * @param dto 权限信息
+     */
+    @PostMapping("/updatePermission")
+    public RequestResult<Void> updatePermission(@RequestBody @Validated PermissionDTO dto) {
+        service.updatePermission(dto);
+        return RequestResult.success();
+    }
+
+    /**
+     * 获取权限列表
+     * @return {@link List<PermissionVO>} 权限列表
+     */
+    @PostMapping("/getPermissionList")
+    public RequestResult<List<PermissionVO>> getPermissionList() {
+        List<PermissionVO> results = service.getPermissionList();
+        return RequestResult.success(results);
     }
 }

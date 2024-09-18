@@ -9,6 +9,7 @@ import com.curriculumdesign.drugtraceabilitysystem.entity.RolePermissionMappingE
 import com.curriculumdesign.drugtraceabilitysystem.enums.ApiType;
 import com.curriculumdesign.drugtraceabilitysystem.mapper.PermissionMapper;
 import com.curriculumdesign.drugtraceabilitysystem.mapper.RoleMapper;
+import com.curriculumdesign.drugtraceabilitysystem.mapper.RolePermissionMappingMapper;
 import com.curriculumdesign.drugtraceabilitysystem.service.PermissionService;
 import com.curriculumdesign.drugtraceabilitysystem.service.RolePermissionMappingService;
 import com.curriculumdesign.drugtraceabilitysystem.vo.PermissionVO;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -31,6 +33,9 @@ public class PermissionImpl extends ServiceImpl<PermissionMapper, PermissionEnti
 
     @Autowired
     private RolePermissionMappingService rolePermissionMappingService;
+
+    @Autowired
+    private RolePermissionMappingMapper rolePermissionMappingMapper;
 
     @Override
     public PermissionVO addPermission(PermissionDTO dto) {
@@ -49,5 +54,60 @@ public class PermissionImpl extends ServiceImpl<PermissionMapper, PermissionEnti
         }
         rolePermissionMappingService.saveBatch(mappingEntities);
         return BeanUtil.copyProperties(saveEntity, PermissionVO.class);
+    }
+
+    @Override
+    public void deletePermissionById(Long id) {
+        // 判断是否存在此权限信息
+        PermissionEntity permissionEntity = super.getById(id);
+        if (Objects.isNull(permissionEntity)) {
+            throw new IllegalArgumentException("不存在id为: " + id + "的权限信息");
+        }
+        // 判断是否存在与角色的关联关系
+        if (isPermissionAllowed(id)) {
+            throw new IllegalArgumentException("该权限已被角色关联，不能删除");
+        }
+        // 删除权限信息
+        super.removeById(id);
+        // 删除与角色的关联关系
+        rolePermissionMappingMapper.deleteRolePermissionMappingByPermissionId(id);
+    }
+
+    @Override
+    public void updatePermission(PermissionDTO dto) {
+        Long id = dto.getId();
+        if (Objects.isNull(id)) {
+            throw new IllegalArgumentException("权限id不能为空");
+        }
+        PermissionEntity permissionEntity = super.getById(id);
+        if (Objects.isNull(permissionEntity)) {
+            throw new IllegalArgumentException("不存在id为: " + id + "的权限信息");
+        }
+        dto.setApiUrl(permissionEntity.getApiUrl());
+        BeanUtil.copyProperties(dto, permissionEntity);
+        super.updateById(permissionEntity);
+    }
+
+    @Override
+    public List<PermissionVO> getPermissionList() {
+        List<PermissionEntity> permissionEntities = super.list();
+        List<PermissionVO> permissionVOList = BeanUtil.copyToList(permissionEntities, PermissionVO.class);
+        for (PermissionVO permissionVO : permissionVOList) {
+            permissionVO.setIsUsed(isPermissionAllowed(permissionVO.getId()));
+        }
+        return permissionVOList;
+    }
+
+    /**
+     * 判断权限是否正在被角色使用
+     * @param permissionId 权限id
+     */
+    private boolean isPermissionAllowed(Long permissionId) {
+        List<RolePermissionMappingEntity> mappingList = rolePermissionMappingMapper.getRolePermissionMappingByPermissionId(permissionId);
+        if (!mappingList.isEmpty()) {
+            long count = mappingList.stream().filter(RolePermissionMappingEntity::getAllowed).count();
+            return count > 0;
+        }
+        return false;
     }
 }

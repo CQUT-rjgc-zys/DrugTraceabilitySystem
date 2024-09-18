@@ -90,12 +90,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
 
     @Override
     public void updateRole(RoleDTO dto) {
-        if (Objects.isNull(dto.getId())) {
+        Long id = dto.getId();
+        if (Objects.isNull(id)) {
             throw new IllegalArgumentException("更新角色信息时，id不能为空");
         }
-        RoleEntity roleEntity = super.getById(dto.getId());
+        RoleEntity roleEntity = super.getById(id);
         if (Objects.isNull(roleEntity)) {
-            throw new IllegalArgumentException("不存在id：" + dto.getId() + "对应的角色信息");
+            throw new IllegalArgumentException("不存在id：" + id + "对应的角色信息");
         }
         roleEntity.setRoleDesc(dto.getRoleDesc());
         super.updateById(roleEntity);
