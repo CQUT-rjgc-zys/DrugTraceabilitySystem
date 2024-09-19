@@ -15,13 +15,17 @@ import com.curriculumdesign.drugtraceabilitysystem.service.PermissionService;
 import com.curriculumdesign.drugtraceabilitysystem.service.RolePermissionMappingService;
 import com.curriculumdesign.drugtraceabilitysystem.service.RoleService;
 import com.curriculumdesign.drugtraceabilitysystem.vo.RoleVO;
+import com.curriculumdesign.drugtraceabilitysystem.vo.SinglePermissionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -105,7 +109,25 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     @Override
     public RoleVO getRoleById(Long id) {
         RoleEntity roleEntity = super.getById(id);
-        return BeanUtil.copyProperties(roleEntity, RoleVO.class);
+        if (Objects.isNull(roleEntity)) {
+            throw new IllegalArgumentException("不存在id：" + id + "对应的角色信息");
+        }
+        List<RolePermissionMappingEntity> mappingList = rolePermissionMappingMapper.getRolePermissionMappingByRoleId(id);
+        List<Long> permissionIds = mappingList.stream()
+                .map(RolePermissionMappingEntity::getPermissionId)
+                .collect(Collectors.toList());
+        Map<Long, Boolean> permissionIdMappingAllowed = mappingList.stream()
+                .collect(Collectors.toMap(RolePermissionMappingEntity::getPermissionId, RolePermissionMappingEntity::getAllowed));
+        List<PermissionEntity> permissionEntities = permissionMapper.selectBatchIds(permissionIds);
+        RoleVO roleVO = BeanUtil.copyProperties(roleEntity, RoleVO.class);
+        List<SinglePermissionVO> permissions = new ArrayList<>();
+        for (PermissionEntity permissionEntity : permissionEntities) {
+            SinglePermissionVO permission = BeanUtil.copyProperties(permissionEntity, SinglePermissionVO.class);
+            permission.setAllowed(permissionIdMappingAllowed.get(permission.getId()));
+            permissions.add(permission);
+        }
+        roleVO.setPermissions(permissions);
+        return roleVO;
     }
 
     @Override

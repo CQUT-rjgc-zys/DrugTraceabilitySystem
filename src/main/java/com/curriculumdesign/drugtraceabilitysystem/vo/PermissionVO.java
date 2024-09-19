@@ -25,11 +25,4 @@ public class PermissionVO {
      */
     private Integer apiType;
 
-    /**
-     * 是否已使用
-     * 0：未使用
-     * 1：已使用
-     * 默认为0
-     */
-    private Boolean isUsed;
 }

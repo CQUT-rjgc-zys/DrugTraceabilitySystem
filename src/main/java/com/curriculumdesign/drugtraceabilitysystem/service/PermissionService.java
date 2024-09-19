@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.curriculumdesign.drugtraceabilitysystem.dto.PermissionDTO;
 import com.curriculumdesign.drugtraceabilitysystem.entity.PermissionEntity;
 import com.curriculumdesign.drugtraceabilitysystem.vo.PermissionVO;
+import com.curriculumdesign.drugtraceabilitysystem.vo.TotalPermissionVO;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface PermissionService extends IService<PermissionEntity> {
 
     void updatePermission(PermissionDTO dto);
 
-    List<PermissionVO> getPermissionList();
+    List<TotalPermissionVO> getPermissionList();
 }

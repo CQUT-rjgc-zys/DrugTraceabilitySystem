@@ -2,6 +2,8 @@ package com.curriculumdesign.drugtraceabilitysystem.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class RoleVO {
 
@@ -24,4 +26,9 @@ public class RoleVO {
      * 角色描述
      */
     private String roleDesc;
+
+    /**
+     * 角色关联权限信息集合
+     */
+    private List<SinglePermissionVO> permissions;
 }

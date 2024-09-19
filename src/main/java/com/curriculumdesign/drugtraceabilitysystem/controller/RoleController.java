@@ -69,7 +69,7 @@ public class RoleController {
     }
 
     /**
-     * 根据角色ID获取角色信息
+     * 根据角色id查询角色信息及相关权限信息
      *
      * @param id 角色ID
      * @return {@link RoleVO} 角色信息

@@ -13,6 +13,7 @@ import com.curriculumdesign.drugtraceabilitysystem.mapper.RolePermissionMappingM
 import com.curriculumdesign.drugtraceabilitysystem.service.PermissionService;
 import com.curriculumdesign.drugtraceabilitysystem.service.RolePermissionMappingService;
 import com.curriculumdesign.drugtraceabilitysystem.vo.PermissionVO;
+import com.curriculumdesign.drugtraceabilitysystem.vo.TotalPermissionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -89,11 +90,11 @@ public class PermissionImpl extends ServiceImpl<PermissionMapper, PermissionEnti
     }
 
     @Override
-    public List<PermissionVO> getPermissionList() {
+    public List<TotalPermissionVO> getPermissionList() {
         List<PermissionEntity> permissionEntities = super.list();
-        List<PermissionVO> permissionVOList = BeanUtil.copyToList(permissionEntities, PermissionVO.class);
-        for (PermissionVO permissionVO : permissionVOList) {
-            permissionVO.setIsUsed(isPermissionAllowed(permissionVO.getId()));
+        List<TotalPermissionVO> permissionVOList = BeanUtil.copyToList(permissionEntities, TotalPermissionVO.class);
+        for (TotalPermissionVO permissionVO : permissionVOList) {
+            permissionVO.setUsed(isPermissionAllowed(permissionVO.getId()));
         }
         return permissionVOList;
     }

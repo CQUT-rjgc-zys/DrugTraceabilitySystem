@@ -4,6 +4,7 @@ import com.curriculumdesign.drugtraceabilitysystem.dto.PermissionDTO;
 import com.curriculumdesign.drugtraceabilitysystem.service.PermissionService;
 import com.curriculumdesign.drugtraceabilitysystem.util.RequestResult;
 import com.curriculumdesign.drugtraceabilitysystem.vo.PermissionVO;
+import com.curriculumdesign.drugtraceabilitysystem.vo.TotalPermissionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,11 +57,11 @@ public class PermissionController {
 
     /**
      * 获取权限列表
-     * @return {@link List<PermissionVO>} 权限列表
+     * @return {@link List<TotalPermissionVO>} 权限列表
      */
     @PostMapping("/getPermissionList")
-    public RequestResult<List<PermissionVO>> getPermissionList() {
-        List<PermissionVO> results = service.getPermissionList();
+    public RequestResult<List<TotalPermissionVO>> getPermissionList() {
+        List<TotalPermissionVO> results = service.getPermissionList();
         return RequestResult.success(results);
     }
 }
