@@ -1,9 +1,9 @@
 package com.curriculumdesign.drugtraceabilitysystem.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.curriculumdesign.drugtraceabilitysystem.entity.PermissionEntity;
+import com.curriculumdesign.drugtraceabilitysystem.entity.DrugEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface PermissionMapper extends BaseMapper<PermissionEntity> {
+public interface DrugMapper extends BaseMapper<DrugEntity> {
 }

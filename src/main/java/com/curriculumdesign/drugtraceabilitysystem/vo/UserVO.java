@@ -16,7 +16,7 @@ public class UserVO {
     /**
      * 角色信息
      */
-    private RoleVO roleVO;
+    private String roleName;
 
     /**
      * 用户名

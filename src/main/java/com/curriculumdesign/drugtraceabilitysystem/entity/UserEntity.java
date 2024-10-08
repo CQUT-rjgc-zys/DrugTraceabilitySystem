@@ -14,13 +14,13 @@ public class UserEntity {
      * 主键
      */
     @TableId(type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     /**
      * 角色id <外键
      */
     @TableField(value = "role_id")
-    private Long roleId;
+    private Integer roleId;
 
     /**
      * 用户名
