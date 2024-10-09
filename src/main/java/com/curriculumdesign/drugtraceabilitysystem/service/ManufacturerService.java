@@ -18,4 +18,6 @@ public interface ManufacturerService extends IService<ManufacturerEntity> {
     List<ManufacturerVO> fuzzyQuery(ManufacturerDTO dto);
 
     void deleteManufacturer(List<Integer> ids);
+
+    void updateManufacturer(ManufacturerDTO dto);
 }

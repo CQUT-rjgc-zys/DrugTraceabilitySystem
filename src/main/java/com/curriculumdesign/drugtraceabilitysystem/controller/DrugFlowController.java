@@ -27,4 +27,6 @@ public class DrugFlowController {
         List<DrugFlowDTO> drugFlows = drugFlowService.getDrugFlowsByDrugId(drugId);
         return RequestResult.success(drugFlows);
     }
+
+
 }

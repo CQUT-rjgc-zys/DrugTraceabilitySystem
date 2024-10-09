@@ -7,9 +7,6 @@ import com.curriculumdesign.drugtraceabilitysystem.vo.UserVO;
 
 public interface UserService extends IService<UserEntity> {
 
-    void register(UserDTO user);
-
     void login(UserDTO user);
 
-    UserVO getUserInfoByUsername(String username);
 }

@@ -49,4 +49,10 @@ public class DistributorServiceImpl extends ServiceImpl<DistributorMapper, Distr
     public void deleteDistributor(List<Integer> ids) {
         super.removeByIds(ids);
     }
+
+    @Override
+    public void updateDistributor(DistributorDTO dto) {
+        DistributorEntity distributorEntity = BeanUtil.copyProperties(dto, DistributorEntity.class);
+        super.updateById(distributorEntity);
+    }
 }

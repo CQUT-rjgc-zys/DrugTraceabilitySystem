@@ -17,12 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
 
     @Override
-    public void register(UserDTO user) {
-        UserEntity userEntity = BeanUtil.copyProperties(user, UserEntity.class);
-        super.save(userEntity);
-    }
-
-    @Override
     public void login(UserDTO user) {
         LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserEntity::getUsername, user.getUsername());
@@ -31,12 +25,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         if (userEntity == null) {
             throw new RuntimeException("用户名或密码错误");
         }
-    }
-
-    @Override
-    public UserVO getUserInfoByUsername(String username) {
-        UserEntity userEntity = super.getOne(new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getUsername, username));
-        Integer roleId = userEntity.getRoleId();
-        return BeanUtil.copyProperties(userEntity, UserVO.class);
     }
 }

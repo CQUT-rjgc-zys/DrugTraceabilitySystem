@@ -43,4 +43,10 @@ public class DistributorController {
         distributorService.deleteDistributor(ids);
         return RequestResult.success();
     }
+
+    @PostMapping("/add")
+    public RequestResult<Void> updateDistributor(@RequestBody DistributorDTO dto) {
+        distributorService.updateDistributor(dto);
+        return RequestResult.success();
+    }
 }

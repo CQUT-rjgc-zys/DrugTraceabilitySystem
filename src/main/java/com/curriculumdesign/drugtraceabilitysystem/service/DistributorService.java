@@ -19,4 +19,6 @@ public interface DistributorService extends IService<DistributorEntity> {
     List<DistributorVO> fuzzyQuery(DistributorDTO dto);
 
     void deleteDistributor(List<Integer> ids);
+
+    void updateDistributor(DistributorDTO dto);
 }

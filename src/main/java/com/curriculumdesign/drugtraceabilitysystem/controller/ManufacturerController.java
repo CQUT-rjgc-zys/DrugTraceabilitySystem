@@ -42,4 +42,10 @@ public class ManufacturerController {
         manufacturerService.deleteManufacturer(ids);
         return RequestResult.success();
     }
+
+    @PostMapping("/update")
+    public RequestResult<Void> updateManufacturer(@RequestBody ManufacturerDTO dto) {
+        manufacturerService.updateManufacturer(dto);
+        return RequestResult.success();
+    }
 }

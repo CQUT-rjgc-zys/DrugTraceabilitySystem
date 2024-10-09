@@ -14,11 +14,6 @@ public class UserVO {
     private Long id;
 
     /**
-     * 角色信息
-     */
-    private String roleName;
-
-    /**
      * 用户名
      */
     private String username;
@@ -27,9 +22,4 @@ public class UserVO {
      * 密码
      */
     private String password;
-
-    /**
-     * 电话号码
-     */
-    private String phone;
 }

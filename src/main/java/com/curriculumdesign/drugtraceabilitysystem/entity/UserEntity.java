@@ -17,12 +17,6 @@ public class UserEntity {
     private Integer id;
 
     /**
-     * 角色id <外键
-     */
-    @TableField(value = "role_id")
-    private Integer roleId;
-
-    /**
      * 用户名
      */
     @TableField(value = "username")
@@ -33,10 +27,4 @@ public class UserEntity {
      */
     @TableField(value = "password")
     private String password;
-
-    /**
-     * 电话号码
-     */
-    @TableField(value = "phone")
-    private String phone;
 }

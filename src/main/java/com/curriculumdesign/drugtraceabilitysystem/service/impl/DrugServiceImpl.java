@@ -8,8 +8,10 @@ import com.curriculumdesign.drugtraceabilitysystem.entity.*;
 import com.curriculumdesign.drugtraceabilitysystem.mapper.*;
 import com.curriculumdesign.drugtraceabilitysystem.service.DrugService;
 import com.curriculumdesign.drugtraceabilitysystem.service.ManufacturerService;
+import com.curriculumdesign.drugtraceabilitysystem.service.WarehouseService;
 import com.curriculumdesign.drugtraceabilitysystem.vo.DrugVO;
 import com.curriculumdesign.drugtraceabilitysystem.vo.ManufacturerVO;
+import com.curriculumdesign.drugtraceabilitysystem.vo.WarehouseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +35,9 @@ public class DrugServiceImpl extends ServiceImpl<DrugMapper, DrugEntity> impleme
 
     @Autowired
     private DrugWarehouseMappingMapper drugWarehouseMappingMapper;
+
+    @Autowired
+    private WarehouseService warehouseService;
 
     @Override
     public DrugVO addDrug(DrugDTO dto) {
@@ -105,7 +110,10 @@ public class DrugServiceImpl extends ServiceImpl<DrugMapper, DrugEntity> impleme
             }
             Integer manufacturerId = entity.getManufacturerId();
             ManufacturerEntity manufacturerEntity = manufacturerService.getById(manufacturerId);
+            Integer warehouseId = entity.getWarehouseId();
+            WarehouseEntity warehouseEntity = warehouseService.getById(warehouseId);
             drugVO.setManufacturer(BeanUtil.copyProperties(manufacturerEntity, ManufacturerVO.class));
+            drugVO.setWarehouse(BeanUtil.copyProperties(warehouseEntity, WarehouseVO.class));
             LocalDateTime productionDate = entity.getProductionDate();
             LocalDateTime expiryDate = entity.getExpiryDate();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日");
@@ -142,7 +150,10 @@ public class DrugServiceImpl extends ServiceImpl<DrugMapper, DrugEntity> impleme
             }
             Integer manufacturerId = entity.getManufacturerId();
             ManufacturerEntity manufacturerEntity = manufacturerService.getById(manufacturerId);
+            Integer warehouseId = entity.getWarehouseId();
+            WarehouseEntity warehouseEntity = warehouseService.getById(warehouseId);
             drugVO.setManufacturer(BeanUtil.copyProperties(manufacturerEntity, ManufacturerVO.class));
+            drugVO.setWarehouse(BeanUtil.copyProperties(warehouseEntity, WarehouseVO.class));
             LocalDateTime productionDate = entity.getProductionDate();
             LocalDateTime expiryDate = entity.getExpiryDate();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日");

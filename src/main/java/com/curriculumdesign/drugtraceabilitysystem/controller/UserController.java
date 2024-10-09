@@ -19,21 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public RequestResult<Void> register(@RequestBody UserDTO user) {
-        userService.register(user);
-        return RequestResult.success();
-    }
-
     @PostMapping("/login")
     public RequestResult<Void> login(@RequestBody UserDTO user) {
         userService.login(user);
         return RequestResult.success();
-    }
-
-    @PostMapping("/getUserInfoByUsername")
-    public RequestResult<UserVO> getUserInfoByUsername(@RequestParam("username") String username) {
-        UserVO user = userService.getUserInfoByUsername(username);
-        return RequestResult.success(user);
     }
 }

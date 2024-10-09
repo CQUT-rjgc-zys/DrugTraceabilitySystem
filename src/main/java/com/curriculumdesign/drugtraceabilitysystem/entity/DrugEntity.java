@@ -18,6 +18,9 @@ public class DrugEntity {
     @TableField("manufacturer_id")
     private Integer manufacturerId;
 
+    @TableField("warehouse_id")
+    private Integer warehouseId;
+
     @TableField("name")
     private String name;
 

@@ -49,4 +49,10 @@ public class ManufacturerServiceImpl extends ServiceImpl<ManufacturerMapper, Man
     public void deleteManufacturer(List<Integer> ids) {
         super.removeByIds(ids);
     }
+
+    @Override
+    public void updateManufacturer(ManufacturerDTO dto) {
+        ManufacturerEntity manufacturerEntity = BeanUtil.copyProperties(dto, ManufacturerEntity.class);
+        super.updateById(manufacturerEntity);
+    }
 }

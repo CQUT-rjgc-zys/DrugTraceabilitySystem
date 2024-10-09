@@ -15,6 +15,8 @@ public class DrugVO {
 
     private ManufacturerVO manufacturer;
 
+    private WarehouseVO warehouse;
+
     private String name;
 
     private Integer batchNumber;
