@@ -18,11 +18,11 @@ public class DrugFlowEntity {
     @TableField("drug_id")
     private Integer drugId;
 
-    @TableField("upstream")
-    private Integer upstream;
+    @TableField("distributor_id")
+    private Integer distributorId;
 
-    @TableField("downstream")
-    private Integer downstream;
+    @TableField("index")
+    private Integer index;
 
     @TableField("time")
     private LocalDateTime time;

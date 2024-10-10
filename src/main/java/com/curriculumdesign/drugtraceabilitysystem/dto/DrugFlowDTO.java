@@ -1,9 +1,6 @@
 package com.curriculumdesign.drugtraceabilitysystem.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.curriculumdesign.drugtraceabilitysystem.vo.DistributorVO;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,9 +12,9 @@ public class DrugFlowDTO {
 
     private Integer drugId;
 
-    private Integer upstream;
+    private Integer distributorId;
 
-    private Integer downstream;
+    private Integer index;
 
     private LocalDateTime time;
 }

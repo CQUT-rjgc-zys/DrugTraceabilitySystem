@@ -11,9 +11,9 @@ public class DrugFlowVO {
 
     private Integer drugId;
 
-    private Integer upstream;
+    private DistributorVO distributor;
 
-    private Integer downstream;
+    private Integer index;
 
-    private LocalDateTime time;
+    private String time;
 }
